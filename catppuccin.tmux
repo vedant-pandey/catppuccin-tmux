@@ -88,6 +88,10 @@ main() {
   local user_icon
   user_icon="$(get_tmux_option "@catppuccin_user_icon" "")"
   readonly user_icon
+  
+  local custom_icon
+  user_icon="$(get_tmux_option "@catppuccin_custom_icon" "")"
+  readonly custom_icon
 
   local host
   host="$(get_tmux_option "@catppuccin_host" "off")"
@@ -147,6 +151,12 @@ main() {
 
   local show_date_time
   readonly show_date_time="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue]$datetime_icon #[fg=$thm_fg,bg=$thm_gray] $date_time "
+  
+  local show_append
+  readonly show_append="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue]$custom_icon #[fg=$thm_fg,bg=$thm_gray] $append "
+  
+  local show_prepend
+  readonly show_prepend="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue]$custom_icon #[fg=$thm_fg,bg=$thm_gray] $prepend "
 
   # Right column 1 by default shows the Window name.
   local right_column1=$show_window
@@ -176,6 +186,14 @@ main() {
 
   if [[ "${date_time}" != "off" ]]; then
     right_column2=$right_column2$show_date_time
+  fi
+
+  if [[ "${append}" != "" ]]; then
+    right_column2=$right_column2$show_append
+  fi
+
+  if [[ "${prepend}" != "" ]]; then
+    right_column2=$show_append$right_column2
   fi
 
   set status-left ""
