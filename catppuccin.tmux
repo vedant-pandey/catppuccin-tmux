@@ -78,11 +78,11 @@ main() {
   readonly user
 
   local prepend
-  prepend="$(get_tmux_option "@catppuccin_prepend" "")"
+  prepend="$(get_tmux_option "@catppuccin_prepend" "---")"
   readonly prepend
 
   local append
-  append="$(get_tmux_option "@catppuccin_append" "")"
+  append="$(get_tmux_option "@catppuccin_append" "---")"
   readonly append
 
   local user_icon
@@ -188,12 +188,12 @@ main() {
     right_column2=$right_column2$show_date_time
   fi
 
-  if [[ "${append}" != "" ]]; then
+  if [[ "${append}" != "---" ]]; then
     right_column2=$right_column2$show_append
   fi
 
-  if [[ "${prepend}" != "" ]]; then
-    right_column2=$show_append$right_column2
+  if [[ "${prepend}" != "---" ]]; then
+    right_column2=$show_prepend$right_column2
   fi
 
   set status-left ""
